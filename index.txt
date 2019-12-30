@@ -1,3 +1,10 @@
 Linux
 	pdfs
 		1) SSH between two AWS EC2 Ubuntu 16.04 instances
+	urls
+		https://devops4solutions.com/ssh-aws-ec2-instances/
+Jenkins
+	pdfs
+		1) CI/CD for PHP using Jenkins as CI server and Apache2 as deployment server
+	urls
+		https://medium.com/@anusha.sharma3010/ci-cd-for-php-using-jenkins-as-ci-server-and-apache2-as-deployment-server-dec954be0271
