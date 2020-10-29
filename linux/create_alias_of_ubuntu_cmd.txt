@@ -1,0 +1,13 @@
+Step 1) Open file & write your shortcut(alias) command for existing linux command
+   gedit ~/.bashrc
+   e.g.
+       alias l="ls"
+       alias gs="git status"
+
+Step 2) Reconfigure bashrc 
+
+        Run following in terminal
+          . ~/.bashrc
+Step 3) Access aliase name for original command
+
+       Now you can access l for ls & gs for git status
