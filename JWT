@@ -1,0 +1,65 @@
+JWT - JSON Web Tokens
+
+- Its mechanism to handle authorization in api communication
+
+- JWT can be used only post authentication
+
+- JWT tokens are value tokens ( Where as session token are reference tokens)
+
+- We have to send in header key "Authorization" value as "Bearer <jwt_token_string>"
+
+Description - 
+
+	As HTTP is stateless protocol we need to maintain state of user in subsequent calls
+	this can be achived using session & auth token.
+
+	JWT is useful scalling up & down using load balancers as it uses same token across all the
+	servers. ( Which may be different session id for different servers. )
+
+	JWT tokens are self signatured by users.
+
+Real time example.
+
+	Suppose we have company having services & customer support team is giving one form where user
+	is going enter all details & sign on the same for certain requirement. suppose next time onwards
+	its customers responsiblity that need to carry that form which contains all his information.
+	just support team member will verify the signature & identify that customer what was issue is mentioned in that form.
+
+
+- JWT consists of 3 parts
+
+	seperated by 2 periods (.)
+ 
+	base64Decode(HEADER_JSON_STRING).base64Decode(PAYLOAD_JSON_STRING).SIGNATURE_VALUE
+
+	e.g.
+
+	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+
+	a) HEADER - consists json having algorithm & type
+				e.g. {"alg":"HS256","typ":"JWT"}
+
+				eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 is base64Encoded value of 
+				{"alg":"HS256","typ":"JWT"}
+
+
+	b) PAYLOAD - Any valid JSON which you need to pass to the server
+				 {"sub":"1234567890","name":"John Doe","iat":1516239022}
+
+
+				 eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ is base64Encoded value of {"sub":"1234567890","name":"John Doe","iat":1516239022}
+
+	c) Signature
+				string value - created using function of hash 
+				encode value with some secreate key ( base64encoded of header + base64encoded of payload )
+
+
+	Note : signature consists of 
+
+Disadvantanges :
+
+	1) Only deals with authorization
+	2) Secured contents can not be put in payload
+	3) If someone gets JWT token on be half of you, they can send requrest so less secure 
+	   ( security can be added by using https )
