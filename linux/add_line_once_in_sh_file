@@ -1,0 +1,13 @@
+in shell scripting if you want add a line only once in certain file then use following command.
+
+Here 
+  LINE - value or text you want to check & add in another file
+  FILE - Destination file where you want to add new line
+
+LINE='textual_content to search' && FILE='destination_file_name' && grep -qF -- "$LINE" "FILE" || echo "$LINE" >> "$FILE"
+e.g.
+    LINE='include "/configs/projectname.conf"' && FILE='/home/shreenivasm/Desktop/abc.txt' && grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+    
+Scenario where we can use above.
+
+  while writing jenkins script if you want add java or maven or any home path to path variable use above syntax.
