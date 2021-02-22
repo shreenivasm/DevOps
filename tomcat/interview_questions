@@ -1,0 +1,3 @@
+How to change port of tomcat?
+
+open -> tomcat dir/conf/server.xml -> in <Connector> tag --> change port you want.
