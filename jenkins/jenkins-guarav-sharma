@@ -1,0 +1,7 @@
+Manage themes
+  Install simple theme plugin
+  Manage Jenkins -> Configure System -> Theme
+    https://cdn.rawgit.com/afonsof/jenkins-material-theme/gh-pages/dist/material-{{your-color-name}}.css
+    color name available - red,green,light-green,blue, light-blue
+    Set the CSS field to the generated URL.
+  Click Apply & Save
