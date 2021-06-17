@@ -1,0 +1,7 @@
+Connecting GCP VMs using terminal in linux
+
+	generate ssh keys using ssh-keygen
+	GCP account -> search -> metadata -> ssh keys --> add new key -> add content of id_rsa.pub
+	Use following command to connect VM
+		ssh -l shree -i ~/<path_of_pub_file> <public_ip_of_server>
+		e.g. ssh -l shree -i ~/.ssh/id_rsa.pub 35.210.233.152
