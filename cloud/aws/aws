@@ -1,0 +1,126 @@
+How to choose regions
+	Complience : Data governance & legal requirements
+	proximity : Reduced latency
+	Available service:
+	Pricing: 
+
+AZ
+	usually : 3
+	min : 2
+	max : 6
+
+Edge locations
+
+Global Service 
+
+	IAM
+	R53
+	CloudFront
+	WAF (Web application firewall)			
+-----------------------------------------------
+
+IAM - Identity Access Management
+
+	Users 
+	Groups
+	Permissions
+	Roles
+
+Lab -
+	Users -> Add user -> 
+
+	Standard - Use IAM user instead of ROOT account
+
+
+IAM Security Tools
+
+	IAM Credentials report (A/C level) - List your accout's users & status of there credentials.
+
+	IAM Access Advisor (User level) - Show service permission granted to user & when those service last were accessed.
+
+	Guidelines
+		Don't use the root account except for aws a/c setup.
+		One physical user = one aws user
+		Use Access Key for programatic access (CLI/SDK)
+		Create & Use Role for giving permissions to AWS Services.
+		Use & Enforce MFA
+		Create a strong pwd policy
+		assign users to groups & assign permissions to groups.
+		
+
+-----------------------------------------------			
+
+Cloud Shell			
+-----------------------------------------------
+EC2
+
+	Placement groups
+		1) Cluster
+			Pros - All EC2 are in same AZ(Racks), Low latency, 10GBPS N/w.
+			Cons - If racks fails, all instances fails at the same time.
+			Use Case : 
+				Big data jobs that need to be complete fast.
+				Application that need extremely low latency & high n/w throughput.
+			
+		2) Spread
+			Pros : Spans across multiple AZ.
+				Reduced risk is simultaneous failure.
+ 			Cons : Limited to 7 instances per AZ, per placement group.
+			Use Case :
+				Application that need maximum availablity.
+				Critical applications where each instance must isolated from failure from each other.
+		3) Partition
+			Upto 7 partitions per AZ.
+			Can span across multiple AZs in the same region.
+			Up to 100s of EC2 instances.
+			Instances the partition do not share racks with instance in the other partitions.
+			A partition failure can affect many EC2 but won't affect other partitions. 
+			EC2 instance get access to the partition information as metadata.
+			Use Case : HDFS, HBase, Cassandra, Kafka.
+
+	Elastic Network Interfaces (ENI)		
+		Logical compnent in VPC that represents a Virtual network card
+		ENI can have following attributes
+			Primary private IPV4, one or more secondary IPV4
+			One Elastic (IPV4) per private IPV4
+			One or more security groups
+			A MAC address.
+		You can create ENI independently & attach them on the fly (move them) on instances
+		for failure.
+		Bound to specific AZ.
+
+		https://aws.amazon.com/blogs/aws/new-elastic-network-interfaces-in-the-virtual-private-cloud/
+
+	EC2 Hibernate
+		The in memory state is preserved.
+		Instance boot is much faster.
+		Under the hood : The RAM state is written to the file in the root EBS Volume.
+		The root EBS volume must be encrypted.
+		Use Cases:
+			Long running processing.
+			Saving the RAM state.
+			Service that take time to initialize.
+		Good to Know :
+			Supported instances families : C3,C4,C5,M3,M4,M5,R3,R4 & R5 					.
+			Instance RAM size : Must be less than 150 GB.
+			Instance size : Not supported for bare metal instances.
+			AMI : Amazon linux 2, Linux AMI, Ubuntu ... & windows.
+			Root volume : must be EBS , encrypted, not instance store & large.
+			Available for : OD & Reserved instances.
+			An instance cannot be hibernated more than 60 days.
+
+	EC2 Nitro
+		Underlying platform for next genration of EC2 instances.
+		New Virtualization technlogy.
+		Allows for better performance.
+			Better n/w options. (enhanced n/w,HPC, IPV6)
+			Higher speed EBS(Nitro is necessary for 64000 EBS IOPS. - max 32000 on non nitro)
+		Better undelying security.
+		Instance types e.g.
+			Virtualized - AI, C5, C5a, C5ad, C5d, C5n, C6g, C6gd, C6gn, D3, D3en, G4...
+			Barmetal - aI.metal, c5.metal,c5d.metal....		
+		
+
+		 
+			
+	
